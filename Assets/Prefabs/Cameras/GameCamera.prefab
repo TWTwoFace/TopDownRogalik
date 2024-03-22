@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _followingTarget: {fileID: 0}
   _borderSize: 3
-  _cameraSpeed: 5
+  _cameraSpeed: 10
   _moveType: 0
 --- !u!1 &6672950395325508030
 GameObject:

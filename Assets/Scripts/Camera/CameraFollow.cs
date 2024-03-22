@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [Header("Following trandform")]
+    [Header("Following transform")]
     [SerializeField] private Transform _followingTarget;
 
     [Space, Header("Offset border")]
@@ -33,6 +33,7 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         DetermineMovementMethod();
+        SetStartPosition();
     }
 
     private float GetDistanceToTarget()
@@ -77,5 +78,10 @@ public class CameraFollow : MonoBehaviour
             return;
         }
         Move = SimpleMove;
+    }
+
+    private void SetStartPosition()
+    {
+        _transform.position = new Vector3(_followingTarget.position.x, _transform.position.y, _followingTarget.position.z);
     }
 }
