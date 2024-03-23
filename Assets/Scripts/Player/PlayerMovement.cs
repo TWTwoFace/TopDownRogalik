@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -5,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private float _speed;
 
-    [Header("Joystic")]
+    [Header("Joystick")]
     [SerializeField] private Joystick _joystick;
 
     private float _horizontal => _joystick.Horizontal;
@@ -13,8 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform _transform;
 
+    private PlayerRotation _rotator;
+
     private void Awake()
     {
+        _rotator = GetComponent<PlayerRotation>();
         _transform = transform;
     }
 
@@ -25,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(new Vector3(_horizontal, _transform.position.y, _vertical).normalized * _speed * Time.deltaTime);
+        Vector3 direction = new Vector3(_horizontal, _transform.position.y, _vertical).normalized;
+        _transform.Translate(direction * _speed * Time.deltaTime);
+        _rotator.RotateTo(direction);
     }
 }
