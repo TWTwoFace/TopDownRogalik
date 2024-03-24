@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
@@ -13,20 +10,28 @@ public class PlayerRotation : MonoBehaviour
 
     private Vector3 _lastRotation = Vector3.forward;
 
-
-    public void RotateTo(Vector3 moveVector)
+    private void Awake()
     {
-        Vector3 direction = DetermineDirection(moveVector);
-        _visualsTransform.rotation = Quaternion.LookRotation(direction);
+        enabled = false;
     }
 
-    private Vector3 DetermineDirection(Vector3 direction)
+    public void Rotate()
     {
-        if(direction == Vector3.zero)
+        _visualsTransform.rotation = Quaternion.RotateTowards(_visualsTransform.rotation, Quaternion.LookRotation(DetermineDirection()), _speed * Time.deltaTime);
+    }
+
+    private Vector3 DetermineDirection()
+    {
+        if (FireJoystickValues.Horizontal != 0 && FireJoystickValues.Vertical != 0)
         {
+            _lastRotation = new Vector3(FireJoystickValues.Horizontal, 0f, FireJoystickValues.Vertical);
             return _lastRotation;
         }
-        _lastRotation = direction;
-        return direction;
+        if (MovementJoystickValues.Horizontal != 0 && MovementJoystickValues.Vertical != 0)
+        {
+            _lastRotation = new Vector3(MovementJoystickValues.Horizontal, 0f, MovementJoystickValues.Vertical);
+            return _lastRotation;
+        }
+        return _lastRotation;
     }
 }

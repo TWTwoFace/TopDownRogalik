@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _followingTarget: {fileID: 0}
-  _borderSize: 1.5
+  _borderSize: 0.75
   _cameraSpeed: 10
   _moveType: 1
 --- !u!1 &6672950395325508030

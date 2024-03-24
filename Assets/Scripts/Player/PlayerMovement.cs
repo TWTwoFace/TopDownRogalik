@@ -10,19 +10,15 @@ public class PlayerMovement : MonoBehaviour
 
     private Transform _transform;
 
-    private PlayerRotation _rotator;
-
     private void Awake()
     {
-        _rotator = GetComponent<PlayerRotation>();
         _transform = transform;
-        
+        enabled = false;
     }
 
     public void Move()
     {
         Vector3 direction = new Vector3(_horizontal, _transform.position.y, _vertical).normalized;
         _transform.Translate(direction * _speed * Time.deltaTime);
-        _rotator.RotateTo(direction);
     }
 }

@@ -13,6 +13,11 @@ public class StateMachine : MonoBehaviour
         SetBehaviourByDefault();
     }
 
+    private void Update()
+    {
+        _currentBehaviour.Update();
+    }
+
     protected virtual void InitBehaviours()
     {
         _behavioursMap = new Dictionary<Type, IBehaviour>();
