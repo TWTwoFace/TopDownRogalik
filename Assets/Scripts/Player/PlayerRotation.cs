@@ -11,7 +11,7 @@ public class PlayerRotation : MonoBehaviour
     [Header("Visuals")] 
     [SerializeField] private Transform _visualsTransform;
 
-    private Vector3 _lastRotation;
+    private Vector3 _lastRotation = Vector3.forward;
 
 
     public void RotateTo(Vector3 moveVector)
@@ -24,10 +24,6 @@ public class PlayerRotation : MonoBehaviour
     {
         if(direction == Vector3.zero)
         {
-            if (_lastRotation == null)
-            {
-                _lastRotation = Vector3.forward;
-            }
             return _lastRotation;
         }
         _lastRotation = direction;

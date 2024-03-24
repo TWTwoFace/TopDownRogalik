@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -6,11 +5,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private float _speed;
 
-    [Header("Joystick")]
-    [SerializeField] private Joystick _joystick;
-
-    private float _horizontal => _joystick.Horizontal;
-    private float _vertical => _joystick.Vertical;
+    private float _horizontal => MovementJoystickValues.Horizontal;
+    private float _vertical => MovementJoystickValues.Vertical;
 
     private Transform _transform;
 
@@ -20,14 +16,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _rotator = GetComponent<PlayerRotation>();
         _transform = transform;
+        
     }
 
-    private void Update()
-    {
-        Move();
-    }
-
-    private void Move()
+    public void Move()
     {
         Vector3 direction = new Vector3(_horizontal, _transform.position.y, _vertical).normalized;
         _transform.Translate(direction * _speed * Time.deltaTime);
